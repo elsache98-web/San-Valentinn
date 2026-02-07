@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Para ti 💗</title>
+
+  <style>
+  body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(#070b1f,#0d1b4d);
+    font-family:Arial;
+  }
+
+  .card{
+    background:#ffd6e7;
+    padding:30px 20px;
+    border-radius:20px;
+    text-align:center;
+    width:350px;
+    box-shadow:0 20px 50px rgba(0,0,0,.5);
+  }
+
+  h2{
+    color:#c2185b;
+    margin:0;
+  }
+
+  h1{
+    color:#8e0045;
+    font-size:24px;
+  }
+
+  .firma{
+    margin:15px 0;
+    font-weight:bold;
+    color:#8e0045;
+  }
+
+  button{
+    border:none;
+    padding:12px 18px;
+    border-radius:12px;
+    margin:5px;
+    font-weight:bold;
+    cursor:pointer;
+  }
+
+  .si{
+    background:#e60073;
+    color:white;
+  }
+
+  .no{
+    background:white;
+  }
+
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Para ti, mi amor... 💗</h2>
+<h1>¿Quieres ser mi San Valentín?</h1>
+
+<p class="firma">— De tu Shasker</p>
+
+<button class="si" onclick="abrir()">Sí quiero 💗</button>
+<button class="no" onclick="no()">No quiero</button>
+
+<p id="msg"></p>
+
+</div>
+
+<script>
+function abrir(){
+ window.location.href="sorpresa.pdf";
+}
+
+function no(){
+ document.getElementById("msg").innerHTML="Piénsalo bien 😅";
+}
+</script>
+
+</body>
+</html>
