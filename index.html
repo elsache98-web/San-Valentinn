@@ -18,83 +18,97 @@ body{
   color:white;
 }
 
+/* 🌙 luna */
+.luna{
+ position:fixed;
+ top:40px;
+ right:60px;
+ width:80px;
+ height:80px;
+ background:#fff6c9;
+ border-radius:50%;
+ box-shadow:0 0 40px #fff6c9,0 0 80px #fff6c9;
+ animation:brillo 3s infinite alternate;
+}
+@keyframes brillo{
+ from{box-shadow:0 0 20px #fff6c9;}
+ to{box-shadow:0 0 60px #fff6c9;}
+}
+
 /* estrellas */
 .star{
-  position:fixed;
-  width:2px; height:2px;
-  background:white;
-  border-radius:50%;
-  animation:brillar 2s infinite;
+ position:fixed;
+ width:2px;
+ height:2px;
+ background:white;
+ border-radius:50%;
+ animation:estrella 2s infinite;
 }
-@keyframes brillar{
-  0%,100%{opacity:.2}
-  50%{opacity:1}
+@keyframes estrella{
+ 0%,100%{opacity:.2}
+ 50%{opacity:1}
 }
 
 .card{
-  background:#ffd6e7;
-  padding:28px 20px;
-  border-radius:22px;
-  text-align:center;
-  width:350px;
-  box-shadow:0 20px 50px rgba(0,0,0,.6);
-  z-index:10;
-  color:black;
+ background:#ffd6e7;
+ padding:28px 20px;
+ border-radius:22px;
+ text-align:center;
+ width:350px;
+ box-shadow:0 20px 50px rgba(0,0,0,.6);
+ z-index:10;
+ color:black;
 }
 
-h2{ color:#c2185b; margin:0; }
-h1{ color:#8e0045; font-size:24px; }
-
-.firma{
-  margin:15px 0;
-  font-weight:bold;
-  color:#8e0045;
-}
+h2{color:#c2185b;margin:0;}
+h1{color:#8e0045;font-size:24px;}
+.firma{margin:15px 0;font-weight:bold;color:#8e0045;}
 
 button{
-  border:none;
-  padding:12px 18px;
-  border-radius:12px;
-  margin:5px;
-  font-weight:bold;
-  cursor:pointer;
+ border:none;
+ padding:12px 18px;
+ border-radius:12px;
+ margin:5px;
+ font-weight:bold;
+ cursor:pointer;
 }
 
-.si{ background:#e60073; color:white; }
-.no{ background:white; position:relative; }
+.si{background:#e60073;color:white;}
+.no{background:white;position:fixed;}
 
 .corazon{
-  position:fixed;
-  top:-20px;
-  pointer-events:none;
-  animation:caer linear forwards;
+ position:fixed;
+ top:-20px;
+ pointer-events:none;
+ animation:caer linear forwards;
 }
 
 @keyframes caer{
-  0%{transform:translateY(-20px); opacity:1;}
-  100%{transform:translateY(110vh); opacity:0;}
+ 0%{transform:translateY(-20px);opacity:1;}
+ 100%{transform:translateY(110vh);opacity:0;}
 }
 
 .overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:999;
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.6);
+ display:none;
+ justify-content:center;
+ align-items:center;
+ z-index:999;
 }
-
 .overlay h1{
-  background:#ffd6e7;
-  padding:20px;
-  border-radius:20px;
-  color:#8e0045;
+ background:#ffd6e7;
+ padding:20px;
+ border-radius:20px;
+ color:#8e0045;
 }
 </style>
 </head>
 
 <body>
+
+<div class="luna"></div>
 
 <div class="card">
 <h2>Para ti, mi amor... 💗</h2>
@@ -115,7 +129,7 @@ button{
 const PDF="https://elsache98-web.github.io/San-Valentinn/sorpresa.pdf";
 
 /* estrellas */
-for(let i=0;i<60;i++){
+for(let i=0;i<80;i++){
  let s=document.createElement("div");
  s.className="star";
  s.style.left=Math.random()*100+"vw";
@@ -123,7 +137,7 @@ for(let i=0;i<60;i++){
  document.body.appendChild(s);
 }
 
-/* corazones flotando */
+/* corazones */
 function corazon(){
  let c=document.createElement("div");
  c.innerHTML="💗";
@@ -134,21 +148,30 @@ function corazon(){
  document.body.appendChild(c);
  setTimeout(()=>c.remove(),5000);
 }
-setInterval(corazon,300);
+setInterval(corazon,250);
 
-/* boton NO se escapa */
+/* boton NO imposible */
 const noBtn=document.getElementById("noBtn");
-noBtn.addEventListener("mouseover",()=>{
- let x=Math.random()*200-100;
- let y=Math.random()*100-50;
- noBtn.style.transform=`translate(${x}px,${y}px)`;
+
+function escapar(){
+ const ancho=window.innerWidth-100;
+ const alto=window.innerHeight-50;
+ const x=Math.random()*ancho;
+ const y=Math.random()*alto;
+ noBtn.style.left=x+"px";
+ noBtn.style.top=y+"px";
+}
+
+noBtn.addEventListener("mouseover",escapar);
+noBtn.addEventListener("touchstart",(e)=>{
+ e.preventDefault();
+ escapar();
 });
 
-/* al presionar SI */
+/* SI quiero */
 function abrir(){
 
-// explosion corazones
-for(let i=0;i<40;i++){
+for(let i=0;i<50;i++){
  setTimeout(()=>{
   let c=document.createElement("div");
   c.innerHTML="💖";
@@ -158,14 +181,14 @@ for(let i=0;i<40;i++){
   c.style.animationDuration="2s";
   document.body.appendChild(c);
   setTimeout(()=>c.remove(),3000);
- },i*30);
+ },i*25);
 }
 
 document.getElementById("overlay").style.display="flex";
 
 setTimeout(()=>{
  window.location.href=PDF;
-},1300);
+},1500);
 }
 </script>
 
