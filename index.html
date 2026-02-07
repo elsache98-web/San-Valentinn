@@ -1,93 +1,123 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Para ti 💗</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Para ti 💗</title>
 
-  <style>
-  body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(#070b1f,#0d1b4d);
-    font-family:Arial;
-  }
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(#070b1f,#0d1b4d);
+  font-family:Arial;
+  overflow:hidden;
+}
 
-  .card{
-    background:#ffd6e7;
-    padding:30px 20px;
-    border-radius:20px;
-    text-align:center;
-    width:350px;
-    box-shadow:0 20px 50px rgba(0,0,0,.5);
-  }
+.card{
+  background:#ffd6e7;
+  padding:30px 20px;
+  border-radius:20px;
+  text-align:center;
+  width:350px;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+  z-index:10;
+}
 
-  h2{
-    color:#c2185b;
-    margin:0;
-  }
+h2{ color:#c2185b; margin:0; }
+h1{ color:#8e0045; font-size:24px; }
 
-  h1{
-    color:#8e0045;
-    font-size:24px;
-  }
+.firma{
+  margin:15px 0;
+  font-weight:bold;
+  color:#8e0045;
+}
 
-  .firma{
-    margin:15px 0;
-    font-weight:bold;
-    color:#8e0045;
-  }
+button{
+  border:none;
+  padding:12px 18px;
+  border-radius:12px;
+  margin:5px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-  button{
-    border:none;
-    padding:12px 18px;
-    border-radius:12px;
-    margin:5px;
-    font-weight:bold;
-    cursor:pointer;
-  }
+.si{ background:#e60073; color:white; }
+.no{ background:white; }
 
-  .si{
-    background:#e60073;
-    color:white;
-  }
+.corazon{
+  position:fixed;
+  top:-20px;
+  pointer-events:none;
+  z-index:1;
+  animation: caer linear forwards;
+}
 
-  .no{
-    background:white;
-  }
-
-  </style>
+@keyframes caer{
+  0%{transform:translateY(-20px) scale(1); opacity:1;}
+  100%{transform:translateY(110vh) scale(1.6); opacity:0;}
+}
+</style>
 </head>
 
 <body>
 
 <div class="card">
-
 <h2>Para ti, mi amor... 💗</h2>
 <h1>¿Quieres ser mi San Valentín?</h1>
-
 <p class="firma">— De tu Shasker</p>
 
 <button class="si" onclick="abrir()">Sí quiero 💗</button>
 <button class="no" onclick="no()">No quiero</button>
 
 <p id="msg"></p>
-
 </div>
 
 <script>
+// corazones flotando siempre
+function crearCorazon(){
+  const c=document.createElement("div");
+  c.innerHTML="💗";
+  c.classList.add("corazon");
+  c.style.left=Math.random()*100+"vw";
+  c.style.fontSize=(Math.random()*20+10)+"px";
+  c.style.animationDuration=(Math.random()*3+2)+"s";
+  document.body.appendChild(c);
+  setTimeout(()=>{c.remove()},5000);
+}
+setInterval(crearCorazon,300);
+
+// EXPLOSION al presionar SI
 function abrir(){
-window.location.href="https://elsache98-web.github.io/San-Valentinn/sorpresa.pdf";
+
+for(let i=0;i<40;i++){
+  setTimeout(()=>{
+    const c=document.createElement("div");
+    c.innerHTML="💖";
+    c.classList.add("corazon");
+    c.style.left="50vw";
+    c.style.fontSize=(Math.random()*30+15)+"px";
+    c.style.animationDuration=(Math.random()*2+1)+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>{c.remove()},3000);
+  },i*30);
+}
+
+// abrir pdf luego de animacion
+setTimeout(()=>{
+ window.location.href="https://elsache98-web.github.io/San-Valentinn/sorpresa.pdf";
+},1200);
 
 }
 
 function no(){
- document.getElementById("msg").innerHTML="Piénsalo bien 😅";
+ document.getElementById("msg").innerHTML="Piénsalo bien 😅💘";
 }
 </script>
 
 </body>
 </html>
+
