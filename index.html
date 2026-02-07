@@ -6,230 +6,167 @@
 <title>Para ti 💗</title>
 
 <style>
-  body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:radial-gradient(circle at 80% 15%, rgba(255,255,200,.18), transparent 35%),
-               radial-gradient(circle at 20% 30%, rgba(255,120,200,.15), transparent 40%),
-               linear-gradient(#070b1f,#0d1b4d);
-    font-family:Arial;
-    overflow:hidden;
-    color:#fff;
-  }
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(#070b1f,#0d1b4d);
+  font-family:Arial;
+  overflow:hidden;
+  color:white;
+}
 
-  /* estrellas */
-  .star{
-    position:fixed;
-    width:2px; height:2px;
-    background:#fff;
-    opacity:.9;
-    border-radius:50%;
-    animation: twinkle 2.8s infinite ease-in-out;
-    z-index:0;
-  }
-  @keyframes twinkle{
-    0%,100%{opacity:.2; transform:scale(1);}
-    50%{opacity:1; transform:scale(1.6);}
-  }
+/* estrellas */
+.star{
+  position:fixed;
+  width:2px; height:2px;
+  background:white;
+  border-radius:50%;
+  animation:brillar 2s infinite;
+}
+@keyframes brillar{
+  0%,100%{opacity:.2}
+  50%{opacity:1}
+}
 
-  .card{
-    background:#ffd6e7;
-    padding:26px 18px;
-    border-radius:22px;
-    text-align:center;
-    width:360px;
-    box-shadow:0 20px 55px rgba(0,0,0,.55);
-    z-index:10;
-    color:#111;
-    position:relative;
-  }
+.card{
+  background:#ffd6e7;
+  padding:28px 20px;
+  border-radius:22px;
+  text-align:center;
+  width:350px;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+  z-index:10;
+  color:black;
+}
 
-  h2{ color:#c2185b; margin:0 0 6px; }
-  h1{ color:#8e0045; font-size:24px; margin:0 0 10px; }
-  .firma{ margin:10px 0 16px; font-weight:bold; color:#8e0045; }
+h2{ color:#c2185b; margin:0; }
+h1{ color:#8e0045; font-size:24px; }
 
-  .btns{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+.firma{
+  margin:15px 0;
+  font-weight:bold;
+  color:#8e0045;
+}
 
-  button{
-    border:none;
-    padding:12px 16px;
-    border-radius:12px;
-    font-weight:bold;
-    cursor:pointer;
-    user-select:none;
-  }
+button{
+  border:none;
+  padding:12px 18px;
+  border-radius:12px;
+  margin:5px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-  .si{ background:#e60073; color:white; }
-  .no{ background:white; color:#333; position:relative; }
+.si{ background:#e60073; color:white; }
+.no{ background:white; position:relative; }
 
-  .msg{ margin:12px 0 0; font-weight:bold; color:#333; min-height:18px; }
+.corazon{
+  position:fixed;
+  top:-20px;
+  pointer-events:none;
+  animation:caer linear forwards;
+}
 
-  /* corazones */
-  .corazon{
-    position:fixed;
-    top:-30px;
-    pointer-events:none;
-    z-index:2;
-    animation: caer linear forwards;
-    filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
-  }
+@keyframes caer{
+  0%{transform:translateY(-20px); opacity:1;}
+  100%{transform:translateY(110vh); opacity:0;}
+}
 
-  @keyframes caer{
-    0%{ transform:translateY(-30px) translateX(0) rotate(0deg) scale(1); opacity:1; }
-    100%{ transform:translateY(110vh) translateX(var(--drift, 0px)) rotate(25deg) scale(1.7); opacity:0; }
-  }
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
 
-  /* pantalla “sabía que dirías que sí” */
-  .overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:999;
-  }
-  .overlay .box{
-    background:#ffd6e7;
-    color:#8e0045;
-    padding:18px 16px;
-    border-radius:18px;
-    text-align:center;
-    width:min(360px, 90vw);
-    box-shadow:0 20px 60px rgba(0,0,0,.6);
-    font-weight:900;
-  }
-
-  .music{
-    margin-top:10px;
-    background:#fff;
-    border:2px solid #ffd6e7;
-  }
+.overlay h1{
+  background:#ffd6e7;
+  padding:20px;
+  border-radius:20px;
+  color:#8e0045;
+}
 </style>
 </head>
 
 <body>
 
 <div class="card">
-  <h2>Para ti, mi amor... 💗</h2>
-  <h1>¿Quieres ser mi San Valentín?</h1>
-  <div class="firma">— De tu Shasker</div>
+<h2>Para ti, mi amor... 💗</h2>
+<h1>¿Quieres ser mi San Valentín?</h1>
+<p class="firma">— De tu Shasker</p>
 
-  <div class="btns">
-    <button class="si" id="btnSi">Sí quiero 💗</button>
-    <button class="no" id="btnNo">No quiero</button>
-  </div>
+<button class="si" onclick="abrir()">Sí quiero 💗</button>
+<button class="no" id="noBtn">No quiero</button>
 
-  <button class="music" id="btnMusic">🎵 Activar música</button>
-
-  <div class="msg" id="msg"></div>
+<p id="msg"></p>
 </div>
 
 <div class="overlay" id="overlay">
-  <div class="box">💗 ¡Sabía que dirías que sí! 💗<br><br>Abriendo tu sorpresa…</div>
+<h1>💗 Sabía que dirías que sí 💗</h1>
 </div>
 
-<!-- Música: pon tu archivo en el repo como musica.mp3 (raíz) -->
-<audio id="music" loop>
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-const PDF_URL = "https://elsache98-web.github.io/San-Valentinn/sorpresa.pdf";
+const PDF="https://elsache98-web.github.io/San-Valentinn/sorpresa.pdf";
 
-/* ===== Estrellas ===== */
-for(let i=0;i<70;i++){
-  const s=document.createElement("div");
-  s.className="star";
-  s.style.left=(Math.random()*100)+"vw";
-  s.style.top=(Math.random()*100)+"vh";
-  s.style.animationDuration=(Math.random()*2+1.8)+"s";
-  s.style.opacity=(Math.random()*0.8+0.2);
-  document.body.appendChild(s);
+/* estrellas */
+for(let i=0;i<60;i++){
+ let s=document.createElement("div");
+ s.className="star";
+ s.style.left=Math.random()*100+"vw";
+ s.style.top=Math.random()*100+"vh";
+ document.body.appendChild(s);
 }
 
-/* ===== Corazones flotando ===== */
-function crearCorazon(tipo="💗"){
-  const c=document.createElement("div");
+/* corazones flotando */
+function corazon(){
+ let c=document.createElement("div");
+ c.innerHTML="💗";
+ c.className="corazon";
+ c.style.left=Math.random()*100+"vw";
+ c.style.fontSize=(Math.random()*20+10)+"px";
+ c.style.animationDuration=(Math.random()*3+2)+"s";
+ document.body.appendChild(c);
+ setTimeout(()=>c.remove(),5000);
+}
+setInterval(corazon,300);
+
+/* boton NO se escapa */
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+ let x=Math.random()*200-100;
+ let y=Math.random()*100-50;
+ noBtn.style.transform=`translate(${x}px,${y}px)`;
+});
+
+/* al presionar SI */
+function abrir(){
+
+// explosion corazones
+for(let i=0;i<40;i++){
+ setTimeout(()=>{
+  let c=document.createElement("div");
+  c.innerHTML="💖";
   c.className="corazon";
-  c.textContent = tipo;
-
-  c.style.left=(Math.random()*100)+"vw";
-  const size=Math.floor(Math.random()*18)+12;
-  c.style.fontSize=size+"px";
-
-  const dur=(Math.random()*2.8)+2.2;
-  c.style.animationDuration=dur+"s";
-
-  const drift=Math.floor((Math.random()*140)-70);
-  c.style.setProperty("--drift", drift+"px");
-
+  c.style.left="50vw";
+  c.style.fontSize=(Math.random()*30+15)+"px";
+  c.style.animationDuration="2s";
   document.body.appendChild(c);
-  setTimeout(()=>c.remove(), Math.ceil(dur*1000)+200);
-}
-setInterval(()=>crearCorazon(Math.random()<0.5?"💗":"💖"), 260);
-
-/* ===== Botón NO se escapa ===== */
-const btnNo = document.getElementById("btnNo");
-const msg = document.getElementById("msg");
-
-function moverNo(){
-  msg.textContent = "Ese botón no sirve 😅💘";
-  const card = document.querySelector(".card");
-  const rect = card.getBoundingClientRect();
-
-  // límites dentro de la tarjeta
-  const maxX = rect.width - btnNo.offsetWidth - 10;
-  const maxY = 120; // solo se mueve cerca del área de botones
-
-  const x = Math.random() * maxX;
-  const y = (Math.random() * maxY) - 20;
-
-  btnNo.style.transform = `translate(${x}px, ${y}px)`;
+  setTimeout(()=>c.remove(),3000);
+ },i*30);
 }
 
-btnNo.addEventListener("mouseenter", moverNo);
-btnNo.addEventListener("touchstart", (e)=>{ e.preventDefault(); moverNo(); }, {passive:false});
+document.getElementById("overlay").style.display="flex";
 
-/* ===== Explosión + overlay + abrir PDF ===== */
-const overlay = document.getElementById("overlay");
-document.getElementById("btnSi").addEventListener("click", ()=>{
-  // explosión de corazones en el centro
-  for(let i=0;i<45;i++){
-    setTimeout(()=>{
-      const c=document.createElement("div");
-      c.className="corazon";
-      c.textContent = (Math.random()<0.5) ? "💖" : "💗";
-      c.style.left="50vw";
-      c.style.fontSize=(Math.random()*26+18)+"px";
-      c.style.animationDuration=(Math.random()*1.5+1.2)+"s";
-      const drift=Math.floor((Math.random()*300)-150);
-      c.style.setProperty("--drift", drift+"px");
-      document.body.appendChild(c);
-      setTimeout(()=>c.remove(), 2500);
-    }, i*20);
-  }
-
-  overlay.style.display="flex";
-
-  setTimeout(()=>{
-    window.location.href = PDF_URL;
-  }, 1400);
-});
-
-/* ===== Música (botón) ===== */
-const music = document.getElementById("music");
-document.getElementById("btnMusic").addEventListener("click", async ()=>{
-  try{
-    await music.play();
-    msg.textContent = "🎵 Música activada 💗";
-  }catch(e){
-    msg.textContent = "Si no suena, sube un archivo musica.mp3 al repo.";
-  }
-});
+setTimeout(()=>{
+ window.location.href=PDF;
+},1300);
+}
 </script>
 
 </body>
